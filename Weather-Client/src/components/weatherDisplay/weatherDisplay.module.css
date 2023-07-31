@@ -1,0 +1,101 @@
+.display-container {
+  position: relative;
+  top: 8%;
+  width: 70%;
+  height: 35%;
+  backdrop-filter: blur(3px);
+  background: linear-gradient(45deg, #88b2ffcc, #ea8bffdb);
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+  color: rgb(122, 121, 121);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.display-container > * {
+  position: relative;
+}
+
+.favorite-btn {
+  font-size: 3rem !important;
+  flex: 1;
+  position: absolute;
+  top: 5%;
+}
+
+.favorite-btn:hover {
+  cursor: pointer;
+}
+
+.display-left {
+  height: 95%;
+  width: 48%;
+  left: 2%;
+  display: flex;
+  flex-direction: column;
+}
+
+.display-day {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.display-date {
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin-left: 1%;
+}
+
+.display-location {
+  font-size: 1.2rem;
+  display: flex;
+  flex: 1;
+}
+
+.display-icon {
+  height: 55%;
+  max-height: 4.5rem;
+  align-self: baseline;
+}
+
+.display-right {
+  height: 95%;
+  width: 48%;
+  right: 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.display-degrees {
+  font-size: 13vmin;
+  font-weight: 700;
+  position: absolute;
+  top: 50%;
+  left: 9%;
+  transform: translate(-50%, -50%);
+}
+
+.display-degrees-celsius {
+  font-size: 1.6rem;
+  position: absolute;
+  bottom: 46%;
+}
+
+.display-desc {
+  font-size: 1.5rem;
+  right: -9%;
+  position: absolute;
+  width: 195%;
+  display: flex;
+  align-self: flex-end;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .display-desc {
+    justify-content: flex-end;
+  }
+}

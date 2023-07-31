@@ -1,0 +1,14 @@
+.searchField > div {
+  background-color: #eeecec;
+  border: none;
+}
+
+.searchField > div > div > div {
+  font-size: 1.2rem;
+}
+
+.searchField {
+  width: 70%;
+  position: relative;
+  top: 5%;
+}
