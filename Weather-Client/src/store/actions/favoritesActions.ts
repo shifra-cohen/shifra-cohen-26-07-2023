@@ -1,14 +1,15 @@
 import {
-  FAVORITE_ADD_ITEM_SUCCESS,
-  FAVORITE_REMOVE_ITEM_SUCCESS,
+  CurrentAndForeCast,
+  FAVORITE_ADD_ITEM,
+  FAVORITE_REMOVE_ITEM,
 } from "../types";
 
-export const addItemToFavoritesSuccess = (favoriteCityName: string) => ({
-  type: FAVORITE_ADD_ITEM_SUCCESS,
-  payload: favoriteCityName,
+export const addItemToFavorites = (favoriteCityData: CurrentAndForeCast) => ({
+  type: FAVORITE_ADD_ITEM,
+  payload: favoriteCityData,
 });
 
-export const removeItemFromFavoritesSuccess = (favoriteCityName: string) => ({
-  type: FAVORITE_REMOVE_ITEM_SUCCESS,
-  payload: favoriteCityName,
+export const removeItemFromFavorites = (favoriteCityKey: string) => ({
+  type: FAVORITE_REMOVE_ITEM,
+  payload: favoriteCityKey,
 });

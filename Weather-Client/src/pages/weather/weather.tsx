@@ -4,28 +4,52 @@ import WeatherDisplay from "../../components/weatherDisplay/weatherDisplay";
 import { useEffect, useState } from "react";
 import ForeCast from "../../components/foreCast/foreCast";
 import { getWeather } from "../../store/actions/weatherActions";
+import {
+  addItemToFavorites,
+  removeItemFromFavorites,
+} from "../../store/actions/favoritesActions";
 import { searchedValue } from "../../store/types";
-import { useDispatch } from "react-redux/es/hooks/useDispatch";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 
-const Weather = () => {
+interface IWeatherProps {
+  searchedValue?: searchedValue;
+}
+
+const Weather = ({
+  searchedValue = { key: "215854", label: "Tel Aviv IL" },
+}: IWeatherProps) => {
   const dispatch = useDispatch();
 
-  const [searchValue, setSearchValue] = useState<searchedValue>({
-    key: "215854",
-    label: "Tel Aviv IL",
-  });
+  const [input, setInput] = useState<searchedValue>(searchedValue);
 
   const handleSearch = (searchValue: searchedValue) => {
-    setSearchValue(searchValue);
+    setInput(searchValue);
+  };
+
+  const weatherData = useSelector((state: RootState) => state.weather.data);
+  const favorites = useSelector(
+    (state: RootState) => state.favorites.favoritesWeatherItems
+  );
+
+  const toggleFavorite = () => {
+    if (weatherData) {
+      if (
+        favorites.find(
+          (item) => item.searchedValue.key === weatherData.searchedValue.key
+        )
+      ) {
+        dispatch<any>(removeItemFromFavorites(weatherData.searchedValue.key));
+      } else {
+        dispatch<any>(addItemToFavorites({ ...weatherData }));
+      }
+    }
   };
 
   useEffect(() => {
-    dispatch<any>(getWeather(searchValue));
-  }, [searchValue, dispatch]);
-
-  const weatherData = useSelector((state: RootState) => state.weather.data);
+    dispatch<any>(getWeather(input));
+  }, [input, dispatch]);
 
   return (
     <div className={styles["weather-page"]}>
@@ -35,10 +59,18 @@ const Weather = () => {
           <WeatherDisplay
             currentWatherData={weatherData.current}
             locationData={weatherData.searchedValue}
+            toggleFavorite={toggleFavorite}
+            isFavorite={
+              !!favorites.find(
+                (item) =>
+                  item.searchedValue.key === weatherData.searchedValue.key
+              )
+            }
           />
           <ForeCast foreCastData={weatherData.foreCast} />
         </>
       )}
+      {/* <NavBar /> */}
     </div>
   );
 };

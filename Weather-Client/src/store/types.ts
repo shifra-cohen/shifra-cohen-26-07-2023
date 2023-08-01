@@ -2,8 +2,13 @@ export const GET_WEATHER = "GET_WEATHER";
 export const SET_ERROR = "SET_ERROR";
 export const SET_ALERT = "SET_ALERT";
 
-export const FAVORITE_ADD_ITEM_SUCCESS = "FAVORITE_ADD_ITEM_SUCCESS";
-export const FAVORITE_REMOVE_ITEM_SUCCESS = "FAVORITE_REMOVE_ITEM_SUCCESS";
+export const FAVORITE_ADD_ITEM = "FAVORITE_ADD_ITEM";
+export const FAVORITE_REMOVE_ITEM = "FAVORITE_REMOVE_ITEM";
+
+export enum NAVBAR_OPTIONS {
+  HOME = "home",
+  FAVORITES = "favorites",
+}
 
 export interface Weather {
   description: string;
@@ -102,11 +107,6 @@ export interface searchedValue {
   label: string;
 }
 
-export interface FavoriteWather {
-  cityName: string;
-  weatherData: WeatherData | null;
-}
-
 export interface WeatherError {
   cod: string;
   message: string;
@@ -129,13 +129,13 @@ interface GetWeatherAction {
 }
 
 interface AddFavoriteAction {
-  type: typeof FAVORITE_ADD_ITEM_SUCCESS;
-  payload: FavoriteWather;
+  type: typeof FAVORITE_ADD_ITEM;
+  payload: CurrentAndForeCast;
 }
 
 interface RemoveFavoriteAction {
-  type: typeof FAVORITE_REMOVE_ITEM_SUCCESS;
-  payload: FavoriteWather;
+  type: typeof FAVORITE_REMOVE_ITEM;
+  payload: string;
 }
 
 interface SetErrorAction {
@@ -151,8 +151,21 @@ export interface AlertAction {
   payload: string;
 }
 
+// export interface page {
+//   page: NAVBAR_OPTIONS;
+// }
+
+export interface PageAction {
+  type: typeof NAVBAR_OPTIONS;
+  payload: NAVBAR_OPTIONS;
+}
+
 export interface AlertState {
   message: string;
+}
+
+export interface PageState {
+  page: NAVBAR_OPTIONS;
 }
 
 export interface foreCast {

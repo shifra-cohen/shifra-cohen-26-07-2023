@@ -1,15 +1,21 @@
-import { useState } from "react";
 import styles from "./navBar.module.css";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import { NAVBAR_OPTIONS } from "../../utils/constants/navBarConstants";
+import { useDispatch, useSelector } from "react-redux";
+import { setPage } from "../../store/actions/pageAction";
+import { RootState } from "../../store";
 
 const NavBar = () => {
-  const [chosenPage, setChosenPage] = useState<NAVBAR_OPTIONS>(
-    NAVBAR_OPTIONS.HOME
-  );
+  // const [chosenPage, setChosenPage] = useState<NAVBAR_OPTIONS>(
+  //   NAVBAR_OPTIONS.HOME
+  // );
+  const dispatch = useDispatch();
+
+  const page = useSelector((state: RootState) => state.page.page);
+
   const handlePagesChange = (newChosenPage: NAVBAR_OPTIONS) => {
-    setChosenPage(newChosenPage);
+    dispatch<any>(setPage(newChosenPage));
   };
 
   return (
@@ -19,7 +25,7 @@ const NavBar = () => {
         className={`${styles["nav-bar_option"]} ${
           styles[
             `nav-bar_option-home${
-              chosenPage === NAVBAR_OPTIONS.HOME ? "-chosen" : ""
+              page === NAVBAR_OPTIONS.HOME ? "-chosen" : ""
             }`
           ]
         }`}
@@ -31,7 +37,7 @@ const NavBar = () => {
         className={`${styles["nav-bar_option"]} ${
           styles[
             `nav-bar_option-favorites${
-              chosenPage === NAVBAR_OPTIONS.FAVORITES ? "-chosen" : ""
+              page === NAVBAR_OPTIONS.FAVORITES ? "-chosen" : ""
             }`
           ]
         }`}

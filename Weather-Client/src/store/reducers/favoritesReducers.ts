@@ -1,35 +1,30 @@
 import {
-  FAVORITE_ADD_ITEM_SUCCESS,
-  FAVORITE_REMOVE_ITEM_SUCCESS,
+  FAVORITE_ADD_ITEM,
+  FAVORITE_REMOVE_ITEM,
   FavoriteAction,
-  FavoriteWather,
+  CurrentAndForeCast,
 } from "../types";
 
 interface State {
-  data: FavoriteWather[];
+  favoritesWeatherItems: CurrentAndForeCast[];
 }
 
 const initialState: State = {
-  data: [] as FavoriteWather[],
+  favoritesWeatherItems: [] as CurrentAndForeCast[],
 };
 
 const favoritesReducer = (state = initialState, action: FavoriteAction) => {
   const { type, payload } = action;
 
   switch (type) {
-    case FAVORITE_ADD_ITEM_SUCCESS:
+    case FAVORITE_ADD_ITEM:
       return {
-        ...state,
-        favoritesWeatherItems: [...state.data, payload],
+        favoritesWeatherItems: [...state.favoritesWeatherItems, payload],
       };
-    case FAVORITE_REMOVE_ITEM_SUCCESS:
+    case FAVORITE_REMOVE_ITEM:
       return {
-        ...state,
-        favoritesWeatherItems: state.data.filter(
-          (item: FavoriteWather) => item.cityName !== payload.cityName
-        ),
-        favoritesItemsWeather: state.data.filter(
-          (item: FavoriteWather) => item.cityName !== payload.cityName
+        favoritesWeatherItems: state.favoritesWeatherItems.filter(
+          (item) => item.searchedValue.key !== payload
         ),
       };
     default:

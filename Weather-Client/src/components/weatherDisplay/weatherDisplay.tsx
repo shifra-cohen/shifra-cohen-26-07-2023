@@ -1,4 +1,5 @@
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import styles from "./weatherDisplay.module.css";
 import { WeatherData, searchedValue } from "../../store/types";
@@ -6,11 +7,15 @@ import { WeatherData, searchedValue } from "../../store/types";
 interface IWeatherDisplayProps {
   currentWatherData: WeatherData;
   locationData: searchedValue;
+  isFavorite: boolean;
+  toggleFavorite: () => void;
 }
 
 const WeatherDisplay = ({
   currentWatherData,
   locationData,
+  isFavorite,
+  toggleFavorite,
 }: IWeatherDisplayProps) => {
   return (
     <div className={styles["display-container"]}>
@@ -34,7 +39,17 @@ const WeatherDisplay = ({
         />
       </div>
       <div className={styles["display-right"]}>
-        <FavoriteBorderOutlinedIcon className={styles["favorite-btn"]} />
+        {isFavorite ? (
+          <FavoriteIcon
+            className={styles["favorite-btn"]}
+            onClick={toggleFavorite}
+          />
+        ) : (
+          <FavoriteBorderOutlinedIcon
+            className={styles["favorite-btn"]}
+            onClick={toggleFavorite}
+          />
+        )}
         <>
           <span className={styles["display-degrees"]}>
             {Math.round(currentWatherData.Temperature.Metric.Value)}
