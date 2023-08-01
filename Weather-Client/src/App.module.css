@@ -16,7 +16,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   background: url(https://static.radulescu.me/examples/clouds/clouds1000.png);
   background: url(https://static.radulescu.me/examples/clouds/clouds1000.png) 0
       200px,
@@ -25,6 +24,10 @@
       250px;
 
   animation: wind 20s linear infinite;
+}
+
+.dark {
+  background: linear-gradient(45deg, #242222d1, #040970b8);
 }
 
 .modal {
@@ -55,7 +58,8 @@
   animation: glow 1s infinite alternate;
 }
 
-.mode-button-sun:hover {
+.mode-button-sun:hover,
+.mode-button-moon:hover {
   cursor: pointer;
   transform: scale(1.2);
 }
@@ -63,6 +67,7 @@
 .mode-button-moon {
   position: absolute;
   top: 10%;
+  left: 5%;
   width: 18vmin;
   height: 18vmin;
   border-radius: 50%;

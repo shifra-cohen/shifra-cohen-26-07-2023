@@ -18,6 +18,7 @@ function App() {
   const alertMsg = useSelector((state: RootState) => state.alert.message);
   const page = useSelector((state: RootState) => state.page.page);
 
+  const [darkMode, setDarkMode] = useState<boolean>(false);
   const [chosenLocation, setChosenLocation] = useState<
     searchedValue | undefined
   >(undefined);
@@ -32,8 +33,11 @@ function App() {
   }, [page]);
 
   return (
-    <div className={styles.app}>
-      <div className={styles["mode-button-sun"]}></div>
+    <div className={`${styles.app} ${darkMode && styles.dark}`}>
+      <div
+        className={styles[`mode-button-${darkMode ? "moon" : "sun"}`]}
+        onClick={() => setDarkMode((prev) => !prev)}
+      ></div>
       {page === NAVBAR_OPTIONS.HOME ? (
         <Weather searchedValue={chosenLocation} />
       ) : (
