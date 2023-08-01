@@ -1,16 +1,16 @@
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import { currentWeather } from "../../accuWeatherApi/types";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import styles from "./weatherDisplay.module.css";
+import { WeatherData, searchedValue } from "../../store/types";
 
 interface IWeatherDisplayProps {
-  currentWatherData: currentWeather;
-  locationName: string;
+  currentWatherData: WeatherData;
+  locationData: searchedValue;
 }
 
 const WeatherDisplay = ({
   currentWatherData,
-  locationName,
+  locationData,
 }: IWeatherDisplayProps) => {
   return (
     <div className={styles["display-container"]}>
@@ -23,7 +23,7 @@ const WeatherDisplay = ({
         </span>
         <span className={styles["display-location"]}>
           <LocationOnOutlinedIcon />
-          {locationName}
+          {locationData.label}
         </span>
         <img
           className={styles["display-icon"]}

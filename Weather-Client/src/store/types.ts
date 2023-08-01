@@ -1,4 +1,18 @@
-export interface currentWeather {
+export const GET_WEATHER = "GET_WEATHER";
+export const SET_ERROR = "SET_ERROR";
+export const SET_ALERT = "SET_ALERT";
+
+export const FAVORITE_ADD_ITEM_SUCCESS = "FAVORITE_ADD_ITEM_SUCCESS";
+export const FAVORITE_REMOVE_ITEM_SUCCESS = "FAVORITE_REMOVE_ITEM_SUCCESS";
+
+export interface Weather {
+  description: string;
+  icon: string;
+  id: number;
+  main: string;
+}
+
+export interface WeatherData {
   LocalObservationDateTime: string;
   EpochTime: number;
   WeatherText: string;
@@ -83,6 +97,64 @@ export interface currentWeather {
   IndoorRelativeHumidity: boolean;
 }
 
+export interface searchedValue {
+  key: string;
+  label: string;
+}
+
+export interface FavoriteWather {
+  cityName: string;
+  weatherData: WeatherData | null;
+}
+
+export interface WeatherError {
+  cod: string;
+  message: string;
+}
+
+export interface CurrentAndForeCast {
+  searchedValue: searchedValue;
+  current: WeatherData;
+  foreCast: foreCast;
+}
+
+export interface WeatherState {
+  data: CurrentAndForeCast | null;
+  error: string;
+}
+
+interface GetWeatherAction {
+  type: typeof GET_WEATHER;
+  payload: CurrentAndForeCast;
+}
+
+interface AddFavoriteAction {
+  type: typeof FAVORITE_ADD_ITEM_SUCCESS;
+  payload: FavoriteWather;
+}
+
+interface RemoveFavoriteAction {
+  type: typeof FAVORITE_REMOVE_ITEM_SUCCESS;
+  payload: FavoriteWather;
+}
+
+interface SetErrorAction {
+  type: typeof SET_ERROR;
+  payload: string;
+}
+
+export type WeatherAction = GetWeatherAction | SetErrorAction;
+export type FavoriteAction = AddFavoriteAction | RemoveFavoriteAction;
+
+export interface AlertAction {
+  type: typeof SET_ALERT;
+  payload: string;
+}
+
+export interface AlertState {
+  message: string;
+}
+
 export interface foreCast {
   Headline: {
     EffectiveDate: string;
@@ -95,9 +167,9 @@ export interface foreCast {
     MobileLink: string;
     Link: string;
   };
-  DailyForeCasts: {
+  DailyForecasts: {
     map(
-      arg0: (foreCast: dailyForeCast) => import("react/jsx-runtime").JSX.Element
+      arg0: (forCast: dailyForeCast) => import("react/jsx-runtime").JSX.Element
     ): import("react").ReactNode;
     Date: string;
     EpochDate: number;

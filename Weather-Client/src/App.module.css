@@ -9,12 +9,240 @@
 .app {
   height: 100vh;
   width: 100vw;
-  background-color: var(--platinum);
   font-family: "Assistant", sans-serif;
   font-family: "Heebo", sans-serif;
   font-weight: 300;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
+
+  background: url(https://static.radulescu.me/examples/clouds/clouds1000.png);
+  background: url(https://static.radulescu.me/examples/clouds/clouds1000.png) 0
+      200px,
+    url(https://static.radulescu.me/examples/clouds/clouds1200_1.png) 0 300px,
+    url(https://static.radulescu.me/examples/clouds/clouds1000_blur3.png) 100px
+      250px;
+
+  animation: wind 20s linear infinite;
+}
+
+.mode-button-sun {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 12vmin;
+  height: 12vmin;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: -1px 1px 40px 16px #fbe602, 0 0 20px 2px #e70f14,
+    0 0 140px 20px #fabc14;
+  border: none;
+  animation: glow 1s infinite alternate;
+}
+
+.mode-button-sun:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+}
+
+.mode-button-moon {
+  position: absolute;
+  top: 10%;
+  width: 18vmin;
+  height: 18vmin;
+  border-radius: 50%;
+  background-image: radial-gradient(
+      circle at 60% 60%,
+      transparent 50%,
+      white 120%
+    ),
+    radial-gradient(circle at 40% 40%, transparent 50%, black 110%),
+    radial-gradient(
+      circle at top left,
+      rgba(0, 0, 0, 0.15) 0%,
+      rgba(0, 0, 0, 0.75) 100%
+    ),
+    radial-gradient(
+      circle at bottom,
+      rgba(10, 35, 66, 0.4) 30%,
+      transparent 70%
+    ),
+    radial-gradient(
+      circle at bottom,
+      rgba(40, 62, 81, 0.15) 0%,
+      rgba(10, 35, 66, 0.2) 100%
+    ),
+    radial-gradient(
+      circle at top left,
+      rgba(171, 227, 255, 0.75) 0%,
+      rgba(0, 0, 0, 0.5) 90%
+    ),
+    linear-gradient(to left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.1) 100%);
+  background-size: 180%, 100%, 100%, 100%, 100%, 100%, 100%;
+  background-position: 50%, 50%, 50%, 50%, 50%, 50%, 50%;
+  z-index: 2;
+}
+
+.mode-button-moon::after {
+  display: block;
+  content: "";
+  background-image: radial-gradient(
+    circle at 48% 48%,
+    rgba(163, 249, 255, 0.2) 22%,
+    rgba(133, 237, 255, 0.08) 32%,
+    transparent 50%
+  );
+  z-index: -1;
+  position: absolute;
+  left: 36%;
+  top: 45%;
+  width: 48vmin;
+  height: 28vmin;
+  border-radius: 50%;
+  transition: 2s ease-in-out;
+  transform-origin: 50%;
+  animation: moon-glow 4s infinite;
+}
+
+.mode-button-moon::before {
+  display: block;
+  content: "";
+  position: absolute;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  opacity: 0.18;
+  background-image: radial-gradient(
+      rgba(0, 0, 0, 0.1) 32%,
+      rgba(0, 0, 0, 0.25) 50%,
+      transparent 0%
+    ),
+    radial-gradient(
+      rgba(0, 0, 0, 0.1) 32%,
+      rgba(0, 0, 0, 0.25) 50%,
+      transparent 0%
+    ),
+    radial-gradient(
+      rgba(0, 0, 0, 0.1) 32%,
+      rgba(0, 0, 0, 0.25) 50%,
+      transparent 0%
+    ),
+    radial-gradient(
+      rgba(0, 0, 0, 0.1) 32%,
+      rgba(0, 0, 0, 0.25) 50%,
+      transparent 0%
+    ),
+    radial-gradient(
+      rgba(0, 0, 0, 0.1) 32%,
+      rgba(0, 0, 0, 0.25) 50%,
+      transparent 0%
+    ),
+    radial-gradient(
+      rgba(0, 0, 0, 0.1) 42%,
+      rgba(0, 0, 0, 0.25) 50%,
+      transparent 0%
+    ),
+    radial-gradient(
+      rgba(0, 0, 0, 0.1) 42%,
+      rgba(0, 0, 0, 0.25) 50%,
+      transparent 0%
+    ),
+    radial-gradient(
+      rgba(0, 0, 0, 0.1) 44%,
+      rgba(0, 0, 0, 0.25) 50%,
+      transparent 0%
+    ),
+    radial-gradient(
+      rgba(0, 0, 0, 0.25) 44%,
+      rgba(0, 0, 0, 0.25) 50%,
+      transparent 0%
+    ),
+    radial-gradient(
+      rgba(0, 0, 0, 0.1) 44%,
+      rgba(0, 0, 0, 0.25) 50%,
+      transparent 0%
+    ),
+    radial-gradient(
+      rgba(0, 0, 0, 0.1) 44%,
+      rgba(0, 0, 0, 0.25) 50%,
+      transparent 0%
+    ),
+    radial-gradient(
+      rgba(0, 0, 0, 0.6) 44%,
+      rgba(0, 0, 0, 0.6) 50%,
+      transparent 0%
+    ),
+    radial-gradient(
+      rgba(0, 0, 0, 0.6) 44%,
+      rgba(0, 0, 0, 0.6) 50%,
+      transparent 0%
+    ),
+    radial-gradient(
+      rgba(0, 0, 0, 0.4) 45%,
+      rgba(0, 0, 0, 0.5) 50%,
+      transparent 0%
+    ),
+    radial-gradient(
+      rgba(0, 0, 0, 0.4) 45%,
+      rgba(0, 0, 0, 0.5) 50%,
+      transparent 0%
+    ),
+    radial-gradient(
+      rgba(0, 0, 0, 0.4) 47%,
+      rgba(0, 0, 0, 0.5) 50%,
+      transparent 0%
+    ),
+    radial-gradient(
+      rgba(0, 0, 0, 0.4) 47%,
+      rgba(0, 0, 0, 0.5) 50%,
+      transparent 0%
+    ),
+    radial-gradient(
+      rgba(0, 0, 0, 0.4) 47%,
+      rgba(0, 0, 0, 0.5) 50%,
+      transparent 0%
+    );
+  background-size: 16% 16%, 16% 16%, 16% 16%, 20% 20%, 20% 20%, 25% 25%, 25% 25%,
+    40% 40%, 40% 40%, 45% 45%, 45% 45%, 50% 50%, 50% 50%, 50% 50%, 50% 50%,
+    60% 60%, 60% 60%, 75% 75%, 75% 75%;
+  background-position: 50% 25%, 25% 50%, 20% 5%, -5% 25%, 25% -5%, 45% 3%,
+    3% 55%, 15% 20%, 22% 14%, -25% -15%, 105% 28%, 105% -32%, 52% 130%, 110% 42%,
+    82% 80%, 133% 110%, -40% 116%, 103% 86%, 116% -36%;
+  background-repeat: repeat-y, repeat-x, repeat, repeat, repeat, repeat, repeat,
+    repeat, repeat, repeat, no-repeat, no-repeat, no-repeat, no-repeat,
+    no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+}
+
+@keyframes moon-glow {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes glow {
+  from {
+    box-shadow: -1px 1px 40px 16px #fbe602, 0 0 20px 2px #e70f14,
+      0 0 140px 20px #fabc14;
+  }
+  to {
+    box-shadow: -1px 1px 60px 20px #fbe602, 0 0 40px 4px #e70f14,
+      0 0 140px 20px #fabc14;
+  }
+}
+
+@keyframes wind {
+  0% {
+    background-position: 0 200px, 0 300px, 100px 250px;
+  }
+  100% {
+    background-position: 1000px 200px, 1200px 300px, 1100px 250px;
+  }
 }

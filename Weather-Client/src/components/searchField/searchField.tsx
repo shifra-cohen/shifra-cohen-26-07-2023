@@ -3,12 +3,8 @@ import styles from "./searchField.module.css";
 import { locationsSearchUrl } from "../../accuWeatherApi/config";
 import { AsyncPaginate } from "react-select-async-paginate";
 import { SingleValue } from "react-select";
-import { autocompleteValue } from "../../accuWeatherApi/types";
-
-export interface searchedValue {
-  key: string;
-  label: string;
-}
+import { autocompleteValue } from "../../store/types";
+import { searchedValue } from "../../store/types";
 
 interface ISearchFieldProps {
   onSearch: (newValue: searchedValue) => void;

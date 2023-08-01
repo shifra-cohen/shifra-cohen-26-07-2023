@@ -1,18 +1,17 @@
 import styles from "./weather.module.css";
-import SearchField, {
-  searchedValue,
-} from "../../components/searchField/searchField";
+import SearchField from "../../components/searchField/searchField";
 import WeatherDisplay from "../../components/weatherDisplay/weatherDisplay";
-import { currentConditionsUrl, forecastUrl } from "../../accuWeatherApi/config";
 import { useEffect, useState } from "react";
-import { currentWeather, forCast } from "../../accuWeatherApi/types";
-import ForCast from "../../components/forCast/forCast";
+import ForeCast from "../../components/foreCast/foreCast";
+import { getWeather } from "../../store/actions/weatherActions";
+import { searchedValue } from "../../store/types";
+import { useDispatch } from "react-redux/es/hooks/useDispatch";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 
 const Weather = () => {
-  const [currentWeather, setCurrentWeather] = useState<currentWeather | null>(
-    null
-  );
-  const [forecastValue, setForecastValue] = useState<forCast | null>(null);
+  const dispatch = useDispatch();
+
   const [searchValue, setSearchValue] = useState<searchedValue>({
     key: "215854",
     label: "Tel Aviv IL",
@@ -23,34 +22,23 @@ const Weather = () => {
   };
 
   useEffect(() => {
-    const getWeather = () => {
-      const currentWeatherFetch = fetch(currentConditionsUrl(searchValue.key));
-      const forecastFetch = fetch(forecastUrl(searchValue.key, true));
+    dispatch<any>(getWeather(searchValue));
+  }, [searchValue, dispatch]);
 
-      Promise.all([currentWeatherFetch, forecastFetch])
-        .then(async (response) => {
-          const weatherResponse = await response[0].json();
-          const forcastResponse = await response[1].json();
-
-          setCurrentWeather({ ...weatherResponse[0] });
-          setForecastValue({ ...forcastResponse });
-        })
-        .catch(console.log);
-    };
-
-    getWeather();
-  }, [searchValue]);
+  const weatherData = useSelector((state: RootState) => state.weather.data);
 
   return (
     <div className={styles["weather-page"]}>
       <SearchField onSearch={handleSearch} />
-      {currentWeather && (
-        <WeatherDisplay
-          currentWatherData={currentWeather}
-          locationName={searchValue.label}
-        />
+      {weatherData && (
+        <>
+          <WeatherDisplay
+            currentWatherData={weatherData.current}
+            locationData={weatherData.searchedValue}
+          />
+          <ForeCast foreCastData={weatherData.foreCast} />
+        </>
       )}
-      {forecastValue && <ForCast forCastData={forecastValue} />}
     </div>
   );
 };
