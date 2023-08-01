@@ -1,5 +1,3 @@
-// const apiKey = "go3cnbNLwwgrxlEepnmaVGAasVazxKfx"; stolen
-// const apiKey = "3I5y1Khg6oWfpzD4slh3F1N2anL3zgt1"; me
 const apiKey = "lZdpBnO8p6H56U29LhS1ks9RheWmnET6";
 
 export const locationsSearchUrl = (userInput: string) =>
